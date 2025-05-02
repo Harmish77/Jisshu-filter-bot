@@ -772,43 +772,39 @@ async def cb_handler(client: Client, query: CallbackQuery):
             return   
 	
     elif query.data.startswith("stream"):
-    user_id = query.from_user.id
-    file_id = query.data.split('#', 1)[1]
-    log_msg = await client.send_cached_media(
+        user_id = query.from_user.id
+        file_id = query.data.split('#', 1)[1]
+        log_msg = await client.send_cached_media(
         chat_id=LOG_CHANNEL,
         file_id=file_id
-    )
-    fileName = quote_plus(get_name(log_msg))
-    redirect_path = f"{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
-    encoded_path = quote_plus(redirect_path)
-    redirect_url = f"https://harmish-moviehub.blogspot.com/p/hk.html?harmish={encoded_path}"
-
-    online = redirect_url
-    download = redirect_url
-
-    btn = [[
-        InlineKeyboardButton("ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=online),
-        InlineKeyboardButton("ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=download)
-    ], [
-        InlineKeyboardButton('❌ ᴄʟᴏsᴇ ❌', callback_data='close_data')
-    ]]
-
-    await query.edit_message_reply_markup(
+        )
+        fileName = quote_plus(get_name(log_msg))
+	redirect_path = f"{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
+	encoded_path = quote_plus(redirect_path)
+	redirect_url = f"https://harmish-moviehub.blogspot.com/p/hk.html?harmish={encoded_path}"
+        online = redirect_url
+        download = redirect_url
+        btn = [[
+            InlineKeyboardButton("ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=online),
+            InlineKeyboardButton("ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=download)
+        ],[
+            InlineKeyboardButton('❌ ᴄʟᴏsᴇ ❌', callback_data='close_data')
+	]]
+        await query.edit_message_reply_markup(
         reply_markup=InlineKeyboardMarkup(btn)
-    )
-
-    username = query.from_user.username
-    await log_msg.reply_text(
-        text=f"#LinkGenrated\n\nIᴅ : <code>{user_id}</code>\nUꜱᴇʀɴᴀᴍᴇ : {username}\n\nNᴀᴍᴇ : {fileName}",
-        quote=True,
-        disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup([
-            [
-                InlineKeyboardButton("🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=download),
-                InlineKeyboardButton('ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🧿', url=online)
-            ]
-        ])
-    )
+	)
+        username = query.from_user.username
+        await log_msg.reply_text(
+            text=f"#LinkGenrated\n\nIᴅ : <code>{user_id}</code>\nUꜱᴇʀɴᴀᴍᴇ : {username}\n\nNᴀᴍᴇ : {fileName}",
+            quote=True,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton("🚀 ꜰᴀꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=download),
+                    InlineKeyboardButton('ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ 🧿', url=online)
+                ]
+            ])
+	)
 
 	
     elif query.data == "buttons":
