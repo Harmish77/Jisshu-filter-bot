@@ -781,7 +781,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         fileName = quote_plus(get_name(log_msg))
         redirect_path = f"{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
 	encoded_path = quote_plus(redirect_path)
-	redirect_url = f"https://harmish-moviehub.blogspot.com/p/hk.html?Tech_VJ={encoded_path}"
+	redirect_url = f"https://harmish-moviehub.blogspot.com/p/hk.html?harmish={encoded_path}"
 
 	online = redirect_url
 	download = redirect_url
