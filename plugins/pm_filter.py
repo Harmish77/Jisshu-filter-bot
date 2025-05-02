@@ -779,8 +779,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
         file_id=file_id
         )
         fileName = quote_plus(get_name(log_msg))
-        online = f"{URL}watch/{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
-        download = f"{URL}{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
+        redirect_path = f"{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
+	encoded_path = quote_plus(redirect_path)
+	redirect_url = f"https://harmish-moviehub.blogspot.com/p/hk.html?Tech_VJ={encoded_path}"
+
+	online = redirect_url
+	download = redirect_url
+
         btn = [[
             InlineKeyboardButton("ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=online),
             InlineKeyboardButton("ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=download)
