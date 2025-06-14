@@ -771,6 +771,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await client.send_message(LOG_CHANNEL, text=f"#FREE_TRAIL_CLAIMED\n\n👤 ᴜꜱᴇʀ ɴᴀᴍᴇ - {query.from_user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ - {user_id}", disable_web_page_preview=True)
             return   
 	
+    
+    elif query.data == "buttons":
+        await query.answer("ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 😊", show_alert=True)
+
+    elif query.data == "pages":
+        await query.answer("ᴛʜɪs ɪs ᴘᴀɢᴇs ʙᴜᴛᴛᴏɴ 😅")
+
+    elif query.data.startswith("lang_art"):
+        _, lang = query.data.split("#")
+        await query.answer(f"ʏᴏᴜ sᴇʟᴇᴄᴛᴇᴅ {lang.title()} ʟᴀɴɢᴜᴀɢᴇ ⚡️", show_alert=True)
     elif query.data.startswith("stream"):
         user_id = query.from_user.id
         file_id = query.data.split('#', 1)[1]
@@ -779,11 +789,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         file_id=file_id
         )
         fileName = quote_plus(get_name(log_msg))
-	redirect_path = f"{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
-	encoded_path = quote_plus(redirect_path)
-	redirect_url = f"https://harmish-moviehub.blogspot.com/p/hk.html?harmish={encoded_path}"
-        online = redirect_url
-        download = redirect_url
+        online = f"{URL}watch/{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
+        download = f"{URL}{log_msg.id}/{fileName}?hash={get_hash(log_msg)}"
         btn = [[
             InlineKeyboardButton("ᴡᴀᴛᴄʜ ᴏɴʟɪɴᴇ", url=online),
             InlineKeyboardButton("ꜰᴀsᴛ ᴅᴏᴡɴʟᴏᴀᴅ", url=download)
@@ -805,18 +812,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 ]
             ])
 	)
-
-	
-    elif query.data == "buttons":
-        await query.answer("ɴᴏ ᴍᴏʀᴇ ᴘᴀɢᴇs 😊", show_alert=True)
-
-    elif query.data == "pages":
-        await query.answer("ᴛʜɪs ɪs ᴘᴀɢᴇs ʙᴜᴛᴛᴏɴ 😅")
-
-    elif query.data.startswith("lang_art"):
-        _, lang = query.data.split("#")
-        await query.answer(f"ʏᴏᴜ sᴇʟᴇᴄᴛᴇᴅ {lang.title()} ʟᴀɴɢᴜᴀɢᴇ ⚡️", show_alert=True)
-  
     elif query.data == "start":
         buttons = [[
                 InlineKeyboardButton('☆ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ☆', url=f'http://t.me/{temp.U_NAME}?startgroup=start')
